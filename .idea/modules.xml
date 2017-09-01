@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ping-ui.iml" filepath="$PROJECT_DIR$/ping-ui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ping-vue-admin/ping-vue-admin.iml" filepath="$PROJECT_DIR$/../ping-vue-admin/ping-vue-admin.iml" />
     </modules>
   </component>
 </project>

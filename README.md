@@ -1,6 +1,6 @@
 # ping-ui
 
-> A UI components Library with Vue.js
+> A UI components Library with Vue.js ,https://xiaoping1988.github.io/index.html#/
 
 > 包含一些echarts和粒子系统的共用组件
 
