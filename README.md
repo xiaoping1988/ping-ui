@@ -8,6 +8,10 @@
 
 npm install ping-ui --save
 
+import PingUI from 'ping-ui'
+
+Vue.use(PingUI)
+
 ## 帮助文档
 
 ### echarts组件

@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "A UI components Library with Vue.js",
   "author": "liujiangping",
-  "private": true,
   "files": [
     "dist",
     "src"
