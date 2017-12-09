@@ -1,3 +1,4 @@
+import echarts from 'echarts'
 /**
  * 图表对象例子
  * @type {{title: string, type: string, reverse: boolean, columns: [*], data: [*]}}
@@ -10,13 +11,14 @@ const chartObjDemo = {
     {
       name: 'dim', // 与data中的key一样
       title: '维度', //
-      x: true, // 用于x轴
+      isDim: true, // 用于x轴
       type: 'line' // 上面的type为'linebar'时才有效
     },
     {
       name: 'index', // 与data中的key一样
       title: '指标', // 即图例
-      x: false, // 用于x轴
+      isDim: false, // 用于x轴
+      area: false, // 折线图是否增加面积图
       type: 'line' // 上面的type为'linebar'时才有效
     }
   ],
@@ -34,7 +36,7 @@ const chartType = {
 }
 
 function getOption (chartObj) {
-  const commonOption = {
+  let commonOption = {
     title: {
       text: chartObj.title,
       textStyle: {
@@ -64,6 +66,11 @@ function getOption (chartObj) {
   return commonOption
 }
 
+/**
+ * 设置折线图或者柱状图
+ * @param commonOption
+ * @param chartObj
+ */
 function setLineOrBarOption (commonOption, chartObj) {
   let _legend = []
   let _seriesMap = {}
@@ -97,11 +104,26 @@ function setLineOrBarOption (commonOption, chartObj) {
   let _series = []
   chartObj.columns.forEach(c => {
     if (!c.x) {
-      _series.push({name: c.title, data: _seriesMap[c.name], type: chartObj.type === 'linebar' ? c.type : chartObj.type})
+      let serie = {name: c.title, data: _seriesMap[c.name], type: chartObj.type === chartType.linebar ? c.type : chartObj.type}
+      if (c.area) {
+        // serie.symbol = 'none'
+        serie.areaStyle = {
+          normal: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+              offset: 0,
+              color: 'rgb(255, 158, 68)'
+            }, {
+              offset: 1,
+              color: 'rgb(255, 70, 131)'
+            }])
+          }
+        }
+      }
+      _series.push(serie)
     }
   })
   commonOption.xAxis = {
-    boundaryGap: chartObj.type !== 'line',
+    boundaryGap: chartObj.type !== chartType.line,
     type: 'category',
     data: _xData
   }

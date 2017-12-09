@@ -1,6 +1,7 @@
 <template>
   <div>
     <p-chart :data="lineChartData" id="line"></p-chart>
+    <p-chart :data="areaChartData" id="area"></p-chart>
     <p-chart :data="barChartData" id="bar"></p-chart>
     <p-chart :data="lineBarChartData" id="linebar"></p-chart>
     <p-chart :data="pieChartData" id="pie"></p-chart>
@@ -16,6 +17,7 @@
       data () {
           return {
               lineChartData: {},
+              areaChartData: {},
               barChartData: {},
               lineBarChartData: {},
               pieChartData: {}
@@ -48,6 +50,33 @@
                   {dim: '周日', index: 700}
                 ]
               }
+
+            this.areaChartData = {
+              title: '面积图标题',
+              type: 'line', // 图类型 ['line','bar','linebar','pie']
+              reverse: false, // 是否要颠倒系列里的data数据
+              columns: [
+                {
+                  name: 'dim', // 与data中的key一样
+                  title: '维度', //
+                  x: true // 用于x轴
+                },
+                {
+                  name: 'index', // 与data中的key一样
+                  title: '指标', // 即图例
+                  area: true
+                }
+              ],
+              data: [
+                {dim: '周一', index: 800},
+                {dim: '周二', index: 600},
+                {dim: '周三', index: 500},
+                {dim: '周四', index: 400},
+                {dim: '周五', index: 500},
+                {dim: '周六', index: 600},
+                {dim: '周日', index: 700}
+              ]
+            }
 
               this.barChartData = {
                 title: '柱状图标题',
